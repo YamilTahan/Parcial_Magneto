@@ -1,62 +1,66 @@
-# API REST para la Detección de Mutantes
+## API REST para la Identificación de Mutantes
 
-## Descripción
-API REST diseñada para determinar si un individuo es mutante a partir de una secuencia de ADN.
+1. **Implementación de la API REST**:
+   - Esta API está diseñada para determinar si un individuo humano tiene características mutantes basándose en su secuencia de ADN.
 
-## Nivel 1: API Principal
+2. **Despliegue de la API**:
+   - La API está alojada en Render, un servicio de computación en la nube sin costo.
+   - [Visita la API en Render](https://parcial-magneto-51xr.onrender.com/swagger-ui/index.html)
 
-### 1. Implementación de la API REST
-# Esta API está orientada a identificar mutantes utilizando secuencias de ADN.
+3. **Acceso al Servicio**:
+   - Puedes verificar si un ser humano es mutante a través del siguiente endpoint:
+     ```
+     POST http://localhost:8080/mutant
+     ```
 
-### 2. Alojamiento de la API
-# La API está disponible en Render
-# [Acceder en Render](https://parcial-magneto-51xr.onrender.com/swagger-ui/index.html)
+4. **Formato de la Solicitud**:
+   - La solicitud debe ser enviada en formato JSON con la siguiente estructura:
+     ```json
+     {
+       "dna": ["ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]
+     }
+     ```
 
-### 3. Endpoint del Servicio
-echo "POST http://localhost:8080/mutant"
-
-### 4. Formato de Solicitud
-cat << EOF
-{
-  "dna": ["ATGCGA", "CAGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"]
-}
-EOF
-
-### 5. Posibles Respuestas
-echo "200 OK: ADN corresponde a un mutante."
-echo "403 Forbidden: ADN corresponde a un humano."
+5. **Posibles Respuestas**:
+   - Si el ADN corresponde a un mutante, recibirás un código HTTP **200 OK**.
+   - Si el ADN es humano, se devolverá un código HTTP **403 Forbidden**.
 
 ---
 
-## Nivel 2: Integración de Base de Datos y Estadísticas
+## Conexión con Base de Datos y Estadísticas
 
-### 1. Integración de H2
-# Base de datos H2 para almacenar los ADN validados (se permite un único registro por ADN).
+1. **Base de Datos H2**:
+   - Se ha integrado una base de datos H2 para almacenar los ADN validados.
+   - Cada ADN puede ser registrado solo una vez.
 
-### 2. Endpoint de Estadísticas
-echo "GET http://localhost:8080/stats"
+2. **Endpoint de Estadísticas**:
+   - Hay un servicio adicional que proporciona estadísticas sobre las verificaciones de ADN:
+     ```
+     GET http://localhost:8080/stats
+     ```
 
-### 3. Formato de Respuesta para Estadísticas
-cat << EOF
-{
-  "count_mutant_dna": 4,
-  "count_human_dna": 1,
-  "ratio": 4
-}
-EOF
+3. **Formato de Respuesta para Estadísticas**:
+   - La respuesta será un JSON que sigue esta estructura:
+     ```json
+     {
+       "count_mutant_dna": 4,
+       "count_human_dna": 1,
+       "ratio": 4
+     }
+     ```
 
-### 4. Requisitos de Escalabilidad
-# Capacidad para manejar entre 100 y 1 millón de solicitudes por segundo.
+4. **Escalabilidad**:
+   - La API ha sido diseñada para manejar una amplia variedad de tráfico, con un rango de solicitudes que va de 100 a 1 millón por segundo.
 
-### 5. Pruebas Automatizadas
-# Se alcanzó una cobertura de código superior al 80%.
+5. **Pruebas Automatizadas**:
+   - Se han llevado a cabo pruebas automáticas que aseguran una cobertura de código superior al **80%**.
 
 ---
 
 ## Resultados de Pruebas
 
-### 1. Resultados de JMeter
-# Los resultados de las pruebas de carga se encuentran en el PDF correspondiente.
+- **Resultados de JMeter**:
+  - Los datos obtenidos de las pruebas de carga realizadas con JMeter están disponibles en el PDF.
 
-### 2. Resultados de JaCoCo
-# Los resultados de las pruebas automatizadas y la cobertura de código están disponibles en el PDF adjunto.
+- **Resultados de JaCoCo**:
+  - Los resultados de las pruebas automatizadas y la cobertura de código generada por JaCoCo también se pueden encontrar en el PDF.
