@@ -41,9 +41,9 @@
    La respuesta será un JSON que sigue esta estructura:
      ```json
      {
-       "count_mutant_dna": 4,
+       "count_mutant_dna": 2,
        "count_human_dna": 1,
-       "ratio": 4
+       "ratio": 2
      }
      ```
 
